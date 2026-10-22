@@ -1,0 +1,32 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">每周推荐</view><view class="sp"></view>
+      <view style="font-size:24rpx;color:var(--text-3)">{{pending}} 条待确认</view></view>
+    <view style="font-size:24rpx;color:var(--text-2);line-height:1.6">每周一 10:00 自动检索并推送。你点「加入」才会进活动库——不会自动塞给你。</view>
+    <view class="chips" style="margin-top:16rpx">
+      <view class="chip {{filter === 'pending' ? 'on' : ''}}" data-k="pending" bindtap="setFilter">待筛选</view>
+      <view class="chip {{filter === 'added' ? 'on' : ''}}" data-k="added" bindtap="setFilter">已加入</view>
+      <view class="chip {{filter === 'ignored' ? 'on' : ''}}" data-k="ignored" bindtap="setFilter">已忽略</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="pick" wx:for="{{list}}" wx:key="_id">
+      <view class="score">{{item.score}}</view>
+      <view class="body">
+        <view class="t">{{item.title}}</view>
+        <view class="why" wx:if="{{item.why}}">{{item.why}}</view>
+        <view class="m">
+          <text class="tag" wx:if="{{item.source}}">{{item.source}}</text>
+          <text class="tag o" wx:if="{{item.deadline}}">截止 {{item.deadline}}</text>
+        </view>
+        <view style="display:flex;gap:10rpx;margin-top:14rpx">
+          <view class="btn sm primary" wx:if="{{item.status === 'pending'}}" data-id="{{item._id}}" bindtap="add">加入</view>
+          <view class="btn sm" wx:if="{{item.status === 'pending'}}" data-id="{{item._id}}" bindtap="ignore">忽略</view>
+          <view class="btn sm ghost" data-id="{{item._id}}" bindtap="openUrl">打开原文</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!list.length}}"><view class="big">这周没有待确认的推荐</view>每周一 10:00 会自动更新</view>
+  </view>
+</view>

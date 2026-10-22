@@ -1,0 +1,40 @@
+{
+  "miniprogramRoot": "./",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "nodeModules": false,
+    "packNpmManually": false,
+    "compileHotReLoad": true
+  },
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": "tools" },
+      { "type": "file", "value": "README.md" }
+    ],
+    "include": []
+  },
+  "appid": "wx375ff55d8526f92b",
+  "projectname": "lifeos-miniprogram",
+  "compileType": "miniprogram",
+  "libVersion": "latest",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        { "name": "今日", "pathName": "pages/today/today", "query": "", "scene": null },
+        { "name": "活动库", "pathName": "pages/library/library", "query": "", "scene": null },
+        { "name": "导入", "pathName": "pages/import/import", "query": "", "scene": null },
+        { "name": "待办", "pathName": "pages/todo/todo", "query": "", "scene": null },
+        { "name": "日程", "pathName": "pages/calendar/calendar", "query": "", "scene": null },
+        { "name": "复盘", "pathName": "pages/review/review", "query": "", "scene": null },
+        { "name": "笔记", "pathName": "pages/note/note", "query": "", "scene": null },
+        { "name": "链条", "pathName": "pages/chain/chain", "query": "", "scene": null },
+        { "name": "推荐", "pathName": "pages/picks/picks", "query": "", "scene": null }
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<view class="wrap">
+  <view class="card">
+    <view class="tiny" style="margin-bottom:12rpx">这些信息会自动带进「一键邮件报名」的落款与联系方式，不用每次重填。</view>
+    <view class="grid2">
+      <view class="fld"><view class="lbl">姓名</view><input class="inp" value="{{mp.name}}" data-k="name" bindinput="onInput" placeholder="你的名字"/></view>
+      <view class="fld"><view class="lbl">学校</view><input class="inp" value="{{mp.school}}" data-k="school" bindinput="onInput" placeholder="四川美术学院"/></view>
+    </view>
+    <view class="grid2">
+      <view class="fld"><view class="lbl">专业</view><input class="inp" value="{{mp.major}}" data-k="major" bindinput="onInput" placeholder="如：视觉传达"/></view>
+      <view class="fld"><view class="lbl">年级/年龄</view><input class="inp" value="{{mp.grade}}" data-k="grade" bindinput="onInput" placeholder="如：大三"/></view>
+    </view>
+    <view class="grid2">
+      <view class="fld"><view class="lbl">电话</view><input class="inp" value="{{mp.phone}}" data-k="phone" bindinput="onInput" placeholder="手机号"/></view>
+      <view class="fld"><view class="lbl">邮箱</view><input class="inp" value="{{mp.email}}" data-k="email" bindinput="onInput" placeholder="你的邮箱"/></view>
+    </view>
+    <view class="fld"><view class="lbl">一句话简介</view><textarea class="inp" style="height:90rpx" value="{{mp.oneLiner}}" data-k="oneLiner" bindinput="onInput" placeholder="一句能让人记住你的话"/></view>
+    <view class="fld">
+      <view class="lbl">简历正文</view>
+      <button class="btn sm" bindtap="chooseFile">上传简历文件</button>
+      <view class="tiny" style="margin:8rpx 0">{{mp.resumeName ? '已存：'+mp.resumeName : '未上传'}}</view>
+      <textarea class="inp" style="height:240rpx" value="{{mp.resumeText}}" data-k="resumeText" bindinput="onInput" placeholder="简历正文/要点（可手填，或上传 txt/md 后自动填入）"/>
+    </view>
+  </view>
+  <view class="btn primary block" bindtap="save">保存我的资料</view>
+</view>

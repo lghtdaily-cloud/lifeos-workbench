@@ -1,0 +1,70 @@
+<view class="wrap">
+  <view class="hero">
+    <view class="date">{{dateStr}}</view>
+    <view class="hi">{{greet}}</view>
+    <view class="sub">{{heroSub}}</view>
+    <view class="hero-stats">
+      <view class="hstat"><view class="n">{{stats.signed}}</view><view class="t">进行中</view></view>
+      <view class="hstat"><view class="n">{{stats.done}}</view><view class="t">已完成</view></view>
+      <view class="hstat"><view class="n">{{stats.todo}}</view><view class="t">待办</view></view>
+      <view class="hstat"><view class="n">{{stats.soon}}</view><view class="t">7天内截止</view></view>
+    </view>
+  </view>
+
+  <block wx:if="{{conflicts.length}}">
+    <view class="warnbar err" wx:for="{{conflicts}}" wx:key="id">
+      <view><text style="font-weight:500">{{item.title}}</text>：{{item.msg}}</view>
+    </view>
+  </block>
+
+  <view class="stat-row">
+    <view class="stat"><view class="n">{{stats.candidate}}</view><view class="t">候选活动</view></view>
+    <view class="stat {{overdueCount ? 'alert' : ''}}"><view class="n">{{overdueCount}}</view><view class="t">已逾期</view></view>
+    <view class="stat {{soonCount ? 'warn' : ''}}"><view class="n">{{soonCount}}</view><view class="t">临近截止</view></view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">今日日程</view></view>
+    <block wx:if="{{todayProjects.length}}">
+      <view class="timeline">
+        <view class="tl" wx:for="{{todayProjects}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+          <view class="tt">{{item.timeText}}{{item.place ? ' · ' + item.place : ''}}</view>
+          <view class="tb">{{item.title}}</view>
+          <view class="tm">{{item.org}}{{item.why ? ' · 想去：' + item.why : ''}}</view>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else><view class="big">今天没有安排</view>点右下角「+」导入一条链接</view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">待办</view></view>
+    <view class="row" wx:for="{{focusTodos}}" wx:key="_id">
+      <view class="ring {{item.done ? 'on' : ''}}" data-id="{{item._id}}" bindtap="toggleTodo"><view class="ck" wx:if="{{item.done}}"></view></view>
+      <view class="body"><view class="t" style="{{item.done ? 'color:var(--done-text);text-decoration:line-through' : ''}}">{{item.title}}</view>
+        <view class="m">{{item.due ? item.due : '无截止'}}</view></view>
+    </view>
+    <view class="empty" wx:if="{{!focusTodos.length}}">没有到期或逾期的待办</view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">7 天内截止</view></view>
+    <view class="row" wx:for="{{soonProjects}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+      <view class="body"><view class="t">{{item.title}}</view>
+        <view class="m">{{item.org}} · {{item.ddlText}}</view></view>
+    </view>
+    <view class="empty" wx:if="{{!soonProjects.length}}">近期没有临近截止的活动</view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">人生链条</view></view>
+    <view class="chain-c" wx:for="{{chains}}" wx:key="k" style="--cc:{{item.c}}">
+      <view class="h">{{item.n}}</view>
+      <view class="bar"><view class="i" style="width:{{item.pct}}%"></view></view>
+      <view style="display:flex;justify-content:space-between;font-size:22rpx;color:var(--text-3);margin-top:8rpx">
+        <text>完成 {{item.done}} / {{item.total}}</text><text>{{item.active}} 项进行中</text></view>
+    </view>
+  </view>
+
+  <view class="fab" bindtap="goImport">+</view>
+</view>

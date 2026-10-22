@@ -1,0 +1,63 @@
+<view class="wrap" wx:if="{{p}}">
+  <view class="warnbar err" wx:if="{{conflictMsg}}"><view>{{conflictMsg}}</view></view>
+
+  <view class="card">
+    <view style="font-size:36rpx;font-weight:500;font-family:var(--font-serif);line-height:1.4">{{p.title}}</view>
+    <view class="chips" style="margin-top:16rpx">
+      <text class="tag {{p.stCls}}">{{p.stText}}</text>
+      <text class="tag p" wx:for="{{p.chainNames}}" wx:key="*this">{{item}}</text>
+      <text class="tag" wx:for="{{p.catNames}}" wx:key="*this">{{item}}</text>
+      <text class="tag o" wx:if="{{p.fee}}">{{p.fee}}</text>
+    </view>
+    <view style="margin-top:20rpx">
+      <view class="kv"><view class="k">时间</view><view class="v">{{p.timeText}}</view></view>
+      <view class="kv"><view class="k">地点</view><view class="v">{{p.place || '未确认'}}</view></view>
+      <view class="kv"><view class="k">报名截止</view><view class="v">{{p.ddlText}}</view></view>
+      <view class="kv"><view class="k">主办方</view><view class="v">{{p.org || '未注明'}}</view></view>
+    </view>
+  </view>
+
+  <view class="card" wx:if="{{p.why}}">
+    <view class="card-h"><view class="t">我为什么想去</view></view>
+    <view class="why" style="margin:0">{{p.why}}</view>
+  </view>
+
+  <view class="card" wx:if="{{p.requirements.length}}">
+    <view class="card-h"><view class="t">报名要求（拆解）</view></view>
+    <text class="tag x" wx:for="{{p.requirements}}" wx:key="*this">{{item}}</text>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">联系方式</view></view>
+    <view class="kv" wx:if="{{p.contacts.email}}"><view class="k">邮箱</view><view class="v">{{p.contacts.email}}</view></view>
+    <view class="kv" wx:if="{{p.contacts.wechat}}"><view class="k">微信</view><view class="v">{{p.contacts.wechat}}</view></view>
+    <view class="kv" wx:if="{{p.contacts.phone}}"><view class="k">电话</view><view class="v">{{p.contacts.phone}}</view></view>
+    <view class="kv" wx:if="{{p.contacts.form}}"><view class="k">表单</view><view class="v">{{p.contacts.form}}</view></view>
+    <view class="kv" wx:if="{{!hasContact}}"><view class="k">—</view><view class="v" style="color:var(--danger)">未抓到，需手动补</view></view>
+  </view>
+
+  <view class="card" wx:if="{{p.missing.length}}">
+    <view class="warnbar"><view>这些字段原文没写，需要你确认：{{p.missingText}}</view></view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">相关待办（{{todos.length}}）</view></view>
+    <view class="row" wx:for="{{todos}}" wx:key="_id">
+      <view class="ring {{item.done ? 'on' : ''}}" data-id="{{item._id}}" bindtap="toggleTodo"><view class="ck" wx:if="{{item.done}}"></view></view>
+      <view class="body"><view class="t" style="{{item.done ? 'color:var(--done-text);text-decoration:line-through' : ''}}">{{item.title}}</view></view>
+    </view>
+    <view class="btn sm block" style="margin-top:16rpx" bindtap="genTodos">从报名要求生成待办</view>
+  </view>
+
+  <view class="card" wx:if="{{p.content}}">
+    <view class="card-h"><view class="t">活动内容</view></view>
+    <view style="font-size:25rpx;color:var(--text-2);line-height:1.7;white-space:pre-wrap">{{p.content}}</view>
+  </view>
+
+  <view style="display:flex;gap:12rpx;flex-wrap:wrap">
+    <view class="btn" bindtap="goInsight">需求洞察</view>
+    <view class="btn" bindtap="goMail">邮件报名</view>
+    <view class="btn" bindtap="cycleStatus">改状态</view>
+    <view class="btn primary" bindtap="copyLink">打开原链接</view>
+  </view>
+</view>

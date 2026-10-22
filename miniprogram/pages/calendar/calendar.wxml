@@ -1,0 +1,30 @@
+<view class="wrap">
+  <view class="card">
+    <view style="display:flex;align-items:center;margin-bottom:16rpx">
+      <view style="font-size:32rpx;font-family:var(--font-serif);flex:1">{{title}}</view>
+      <view class="btn sm" bindtap="prev">‹</view>
+      <view class="btn sm" bindtap="goToday">今天</view>
+      <view class="btn sm" bindtap="next">›</view>
+    </view>
+    <view class="cal-grid">
+      <view class="cal-dow" wx:for="{{dows}}" wx:key="*this">{{item}}</view>
+      <view class="cal-cell {{item.dim ? 'dim' : ''}} {{item.today ? 'today' : ''}}" wx:for="{{cells}}" wx:key="date">
+        <view class="cal-dn">{{item.dn}}</view>
+        <view class="cal-ev {{item.cls}}" wx:for="{{item.evs}}" wx:for-item="ev" wx:key="id" data-id="{{ev.id}}" catchtap="goDetail">{{ev.text}}</view>
+        <view wx:if="{{item.todoN}}" style="text-align:center;font-size:18rpx;color:var(--ochre)">●{{item.todoN}}</view>
+      </view>
+    </view>
+    <view style="font-size:22rpx;color:var(--text-3);margin-top:14rpx">● 数字表示当天未完成待办数；红条表示有冲突</view>
+  </view>
+
+  <view class="card" wx:if="{{dayList.length}}">
+    <view class="card-h"><view class="t">{{dayTitle}}</view></view>
+    <view class="timeline">
+      <view class="tl" wx:for="{{dayList}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail">
+        <view class="tt">{{item.timeText}}{{item.place ? ' · ' + item.place : ''}}</view>
+        <view class="tb">{{item.title}}</view>
+        <view class="tm">{{item.org}}</view>
+      </view>
+    </view>
+  </view>
+</view>

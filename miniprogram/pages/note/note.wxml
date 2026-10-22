@@ -1,0 +1,27 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">快速语音笔记</view><view class="sp"></view>
+      <view style="font-size:24rpx;color:var(--text-3)">{{list.length}} 条</view></view>
+    <view style="display:flex;align-items:center;background:var(--bg-sunken);border-radius:var(--r-md);padding:20rpx">
+      <view style="width:18rpx;height:18rpx;border-radius:50%;background:{{recording ? 'var(--danger)' : 'var(--text-3)'}};margin-right:16rpx"></view>
+      <view style="flex:1;font-size:24rpx;color:var(--text-2)">{{recording ? '正在录音…说完了点停止' : '按「开始录音」说话'}}</view>
+      <view class="btn {{recording ? 'danger' : 'primary'}} sm" bindtap="toggleRec">{{recording ? '停止' : '开始录音'}}</view>
+    </view>
+    <view style="font-size:22rpx;color:var(--text-3);margin-top:14rpx">小程序端使用微信同声传译能力（需在设置里开启），识别结果会实时上屏并存为笔记。</view>
+  </view>
+
+  <view class="card">
+    <view class="row" wx:for="{{list}}" wx:key="_id">
+      <view class="body">
+        <view style="font-size:27rpx;line-height:1.6;white-space:pre-wrap">{{item.text}}</view>
+        <view style="font-size:22rpx;color:var(--text-3);margin-top:6rpx">{{item.time}}</view>
+        <view style="display:flex;gap:10rpx;margin-top:12rpx">
+          <view class="btn ghost sm" data-id="{{item._id}}" catchtap="toTodo">转成待办</view>
+          <view class="btn ghost sm" data-id="{{item._id}}" catchtap="toProject">转成活动</view>
+          <view class="btn ghost sm" data-id="{{item._id}}" catchtap="del">删</view>
+        </view>
+      </view>
+    </view>
+    <view class="empty" wx:if="{{!list.length}}"><view class="big">还没有笔记</view>灵感来的时候，说一句就好</view>
+  </view>
+</view>

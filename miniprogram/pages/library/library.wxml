@@ -1,0 +1,34 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">活动库</view><view class="sp"></view>
+      <view style="font-size:24rpx;color:var(--text-3)">{{list.length}} / {{total}}</view></view>
+    <input class="inp" placeholder="搜索标题 / 主办方 / 动机 / 地点" value="{{kw}}" bindinput="onKw"/>
+    <view class="chips" style="margin-top:16rpx">
+      <view class="chip {{filter === item.k ? 'on' : ''}}" wx:for="{{cats}}" wx:key="k" data-k="{{item.k}}" bindtap="setFilter">{{item.n}}<text class="n">{{item.c}}</text></view>
+    </view>
+  </view>
+
+  <view class="card" wx:for="{{list}}" wx:key="_id" data-id="{{item._id}}" bindtap="goDetail" style="margin-bottom:18rpx">
+    <view style="display:flex;align-items:flex-start">
+      <view class="body" style="flex:1;min-width:0">
+        <view style="font-size:30rpx;font-weight:500;line-height:1.45">{{item.title}}</view>
+        <view style="font-size:24rpx;color:var(--text-2);margin-top:6rpx">{{item.org}}</view>
+        <view style="font-size:24rpx;color:var(--text-3);margin-top:4rpx">{{item.dateText}}{{item.place ? ' · ' + item.place : ''}}</view>
+      </view>
+      <view class="tag {{item.stCls}}">{{item.stText}}</view>
+    </view>
+    <view class="why" wx:if="{{item.why}}">为什么想去：{{item.why}}</view>
+    <view class="warnbar" wx:if="{{item.conflictMsg}}" style="margin:12rpx 0 0"><view>{{item.conflictMsg}}</view></view>
+    <view style="margin-top:12rpx">
+      <text class="tag" wx:for="{{item.cats}}" wx:for-item="c" wx:key="*this">{{c}}</text>
+      <text class="tag" wx:if="{{item.ddlText}}">{{item.ddlText}}</text>
+    </view>
+    <view style="display:flex;gap:12rpx;margin-top:16rpx">
+      <view class="btn sm" catchtap="goMail" data-id="{{item._id}}">邮件报名</view>
+      <view class="btn sm" catchtap="goInsight" data-id="{{item._id}}">需求洞察</view>
+    </view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length}}"><view class="big">还没有匹配的活动</view>换个分类或关键词试试，或点右下角「+」导入</view>
+  <view class="fab" bindtap="goImport">+</view>
+</view>

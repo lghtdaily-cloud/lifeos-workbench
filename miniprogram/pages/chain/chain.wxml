@@ -1,0 +1,19 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">人生链条</view></view>
+    <view style="font-size:24rpx;color:var(--text-2);line-height:1.65">四条线索串起你的所有活动。每条都记一个方向，年底回看时才知道自己在往哪走。</view>
+  </view>
+
+  <view class="chain-c" wx:for="{{chains}}" wx:key="k" style="--cc:{{item.c}}">
+    <view class="h">{{item.n}}</view>
+    <view class="d">{{item.d}}</view>
+    <view class="bar"><view class="i" style="width:{{item.pct}}%"></view></view>
+    <view style="display:flex;justify-content:space-between;font-size:22rpx;color:var(--text-3);margin:8rpx 0 16rpx">
+      <text>完成 {{item.done}} / {{item.total}}</text><text>{{item.active}} 项进行中</text></view>
+    <view class="lbl">方向</view>
+    <input class="inp" placeholder="今年在这条线上想完成什么？" value="{{item.goal}}" data-k="{{item.k}}" bindblur="saveGoal"/>
+    <view style="margin-top:14rpx">
+      <text class="tag" wx:for="{{item.projects}}" wx:for-item="p" wx:key="id" data-id="{{p.id}}" bindtap="goDetail">{{p.t}}</text>
+    </view>
+  </view>
+</view>

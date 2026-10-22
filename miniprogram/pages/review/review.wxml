@@ -1,0 +1,32 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">复盘</view><view class="sp"></view>
+      <view style="font-size:24rpx;color:var(--text-3)">{{list.length}} 篇</view></view>
+    <view style="font-size:24rpx;color:var(--text-2);line-height:1.6">模板基于 GRAI（目标-结果-分析-洞察）+ 4L（有能量-被消耗-缺的-学到）。写的时候只填事实，没做的写「材料未提及」，不编。</view>
+    <view class="btn primary block" style="margin-top:20rpx" bindtap="create">写一篇</view>
+  </view>
+
+  <view class="card" wx:for="{{list}}" wx:key="_id" data-id="{{item._id}}" bindtap="open">
+    <view style="display:flex;align-items:center">
+      <view style="font-size:30rpx;font-weight:500;flex:1">{{item.title}}</view>
+      <view style="font-size:22rpx;color:var(--text-3)">{{item.date}}</view>
+    </view>
+    <view style="font-size:24rpx;color:var(--text-2);margin-top:8rpx">{{item.preview}}</view>
+  </view>
+
+  <view class="empty" wx:if="{{!list.length}}"><view class="big">还没有复盘记录</view>建议每周固定一个时间写，周日晚上 20 分钟</view>
+
+  <view class="card" wx:if="{{editing}}">
+    <view class="card-h"><view class="t">{{editing._id ? '编辑复盘' : '写复盘'}}</view></view>
+    <view class="fld"><view class="lbl">标题</view><input class="inp" value="{{editing.title}}" data-f="title" bindinput="onField"/></view>
+    <view class="fld"><view class="lbl">日期</view><picker mode="date" value="{{editing.date}}" bindchange="onDate"><view class="inp">{{editing.date}}</view></picker></view>
+    <view class="fld" wx:for="{{fields}}" wx:key="k">
+      <view class="lbl">{{item.h}}</view>
+      <textarea class="inp" style="height:140rpx" placeholder="{{item.ph}}" value="{{editing[item.k]}}" data-f="{{item.k}}" bindinput="onField"/>
+    </view>
+    <view style="display:flex;gap:12rpx">
+      <view class="btn" style="flex:1" bindtap="cancelEdit">取消</view>
+      <view class="btn primary" style="flex:1" bindtap="saveEdit">保存</view>
+    </view>
+  </view>
+</view>

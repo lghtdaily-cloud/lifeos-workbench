@@ -1,0 +1,31 @@
+<view class="wrap" wx:if="{{p}}">
+  <view class="card">
+    <view style="font-size:24rpx;color:var(--text-3)">主办方类型推断</view>
+    <view style="font-size:32rpx;font-family:var(--font-serif);margin-top:8rpx">{{orgType}}</view>
+    <view style="font-size:23rpx;color:var(--text-3);margin-top:12rpx">依据：主办方名称与活动描述中的信号词。这是推断不是事实，落地前请自行核对。</view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">真实诉求（嘴上说的 vs 实际要的）</view></view>
+    <view class="ins-b" wx:for="{{realNeed}}" wx:key="*this"><view class="li">· {{item}}</view></view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">他们会看重什么</view></view>
+    <view class="ins-b" wx:for="{{theyWant}}" wx:key="*this"><view class="li">· {{item}}</view></view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">我的切入角度</view></view>
+    <view class="ins-b" wx:for="{{myAngle}}" wx:key="*this"><view class="li">· {{item}}</view></view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">风险与红旗</view></view>
+    <view class="ins-b" wx:for="{{risks}}" wx:key="*this"><view class="li">· {{item}}</view></view>
+    <view class="ins-b" wx:if="{{!risks.length}}"><view class="li">未发现明显红旗</view></view>
+  </view>
+
+  <view style="font-size:23rpx;color:var(--text-3);line-height:1.6;padding:0 8rpx">以上为基于公开文本的启发式推断，用于准备自己的表达。不是事实断言，别照抄。</view>
+  <view class="btn primary block" style="margin-top:24rpx" bindtap="goMail">写报名信</view>
+</view>

@@ -1,0 +1,22 @@
+<view class="wrap" wx:if="{{p}}">
+  <view class="warnbar"><view>{{p.contacts.email ? '收件人已抓到：' + p.contacts.email : '原文里没抓到邮箱。可用微信/表单联系，或手动填写收件人。'}}</view></view>
+
+  <view class="card">
+    <view class="fld"><view class="lbl">收件人</view><input class="inp" value="{{to}}" placeholder="对方邮箱" bindinput="onTo"/></view>
+    <view class="fld2">
+      <view class="fld f" style="flex:1"><view class="lbl">我的姓名</view><input class="inp" value="{{who}}" placeholder="你的名字" bindinput="onWho"/></view>
+      <view class="fld f" style="flex:1"><view class="lbl">我的电话</view><input class="inp" value="{{phone}}" placeholder="手机号" bindinput="onPhone"/></view>
+    </view>
+    <view class="fld2">
+      <view class="fld f" style="flex:1"><view class="lbl">年级/年龄</view><input class="inp" value="{{grade}}" placeholder="如：大三 / 21岁" bindinput="onGrade"/></view>
+      <view class="fld f" style="flex:1"><view class="lbl">专业</view><input class="inp" value="{{major}}" placeholder="如：视觉传达" bindinput="onMajor"/></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="card-h"><view class="t">正文</view></view>
+    <view class="mail-pre">{{body}}</view>
+    <view class="btn primary block" style="margin-top:20rpx" bindtap="copyBody">复制正文</view>
+    <view style="font-size:22rpx;color:var(--text-3);margin-top:12rpx;line-height:1.6">提示：微信内打开时网页版 mailto 常常不触发。点「复制正文」后到微信里粘贴更稳。</view>
+  </view>
+</view>

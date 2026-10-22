@@ -1,0 +1,35 @@
+<view class="wrap">
+  <view class="card">
+    <view class="btn block" bindtap="readClip">从微信剪贴板粘贴并识别</view>
+    <view style="font-size:22rpx;color:var(--text-3);margin:10rpx 0 4rpx">在微信里长按链接 → 复制，回到这里会自动弹出导入；此按钮可手动读取剪贴板。</view>
+    <view class="fld" style="margin-top:16rpx">
+      <view class="lbl">活动链接 / 原文粘贴</view>
+      <textarea class="inp" style="height:320rpx" placeholder="把公众号文章链接连同正文一起粘进来。&#10;&#10;例：&#10;https://mp.weixin.qq.com/s/xxxxx&#10;【复调的艺术史·国际学术营】学员招募&#10;时间：10月25日-10月28日&#10;地点：重庆·四川美术学院虎溪校区&#10;报名截止：10月20日&#10;要求：提交个人简历与作品集" value="{{raw}}" bindinput="onRaw"/>
+      <view style="font-size:22rpx;color:var(--text-3);margin-top:10rpx">解析规则：自动拆出时间、地点、截止、费用、联系方式、报名要求。原文没写的会标为「未确认」，不会替你编。</view>
+    </view>
+    <view class="fld">
+      <view class="lbl">我为什么想去（必填）</view>
+      <textarea class="inp" style="height:120rpx" placeholder="一句话。这条会跟着活动一直走，年底复盘时回看。" value="{{why}}" bindinput="onWhy"/>
+    </view>
+    <view class="fld">
+      <view class="lbl">人生链条（可多选）</view>
+      <view class="chips">
+        <view class="chip {{picked[item.k] ? 'on' : ''}}" wx:for="{{chains}}" wx:key="k" data-k="{{item.k}}" bindtap="toggleChain">{{item.n}}</view>
+      </view>
+    </view>
+    <view class="btn primary block" bindtap="doParse">解析并加入</view>
+  </view>
+
+  <view class="card" wx:if="{{preview}}">
+    <view class="card-h"><view class="t">解析结果预览</view></view>
+    <view class="kv"><view class="k">标题</view><view class="v">{{preview.title}}</view></view>
+    <view class="kv"><view class="k">开始</view><view class="v">{{preview.start || '未确认'}} {{preview.startTime}}</view></view>
+    <view class="kv"><view class="k">结束</view><view class="v">{{preview.end || '—'}} {{preview.endTime}}</view></view>
+    <view class="kv"><view class="k">地点</view><view class="v">{{preview.place || '未确认'}}</view></view>
+    <view class="kv"><view class="k">报名截止</view><view class="v">{{preview.deadline || '未确认'}}</view></view>
+    <view class="kv"><view class="k">费用</view><view class="v">{{preview.fee || '未写'}}</view></view>
+    <view class="kv"><view class="k">联系方式</view><view class="v">{{preview.contactText || '未抓到'}}</view></view>
+    <view class="kv"><view class="k">报名要求</view><view class="v">{{preview.reqText || '未识别'}}</view></view>
+    <view class="warnbar" wx:if="{{preview.missingText}}"><view>原文没写、需要你确认：{{preview.missingText}}</view></view>
+  </view>
+</view>

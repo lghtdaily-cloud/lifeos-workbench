@@ -1,0 +1,54 @@
+{
+  "pages": [
+    "pages/today/today",
+    "pages/library/library",
+    "pages/import/import",
+    "pages/detail/detail",
+    "pages/todo/todo",
+    "pages/calendar/calendar",
+    "pages/review/review",
+    "pages/note/note",
+    "pages/chain/chain",
+    "pages/picks/picks",
+    "pages/insight/insight",
+    "pages/mail/mail",
+    "pages/profile/profile"
+  ],
+  "subpackages": [
+    {
+      "root": "pkgCore",
+      "pages": [
+        "core/parser",
+        "core/conflict"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F4F1EC",
+    "navigationBarTitleText": "人生事务规划",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F4F1EC",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#9A928A",
+    "selectedColor": "#6B7A63",
+    "backgroundColor": "#FBF9F5",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/today/today", "text": "今日" },
+      { "pagePath": "pages/library/library", "text": "活动库" },
+      { "pagePath": "pages/todo/todo", "text": "待办" },
+      { "pagePath": "pages/calendar/calendar", "text": "日程" }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于自动识别活动所在区县，辅助判断日程冲突"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

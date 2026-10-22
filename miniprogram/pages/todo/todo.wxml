@@ -1,0 +1,28 @@
+<view class="wrap">
+  <view class="card">
+    <view class="card-h"><view class="t">待办库</view><view class="sp"></view>
+      <view style="font-size:24rpx;color:var(--text-3)">{{openCount}} 未完成</view></view>
+    <view class="chips">
+      <view class="chip {{tab === item.k ? 'on' : ''}}" wx:for="{{tabs}}" wx:key="k" data-k="{{item.k}}" bindtap="setTab">{{item.n}}<text class="n">{{item.c}}</text></view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="row" wx:for="{{list}}" wx:key="_id">
+      <view class="ring {{item.done ? 'on' : ''}}" data-id="{{item._id}}" bindtap="toggle"><view class="ck" wx:if="{{item.done}}"></view></view>
+      <view class="body" data-id="{{item._id}}" bindtap="edit">
+        <view class="t" style="{{item.done ? 'color:var(--done-text);text-decoration:line-through' : ''}}">{{item.title}}</view>
+        <view class="m">
+          <text class="tag {{item.od ? 'x' : ''}}" wx:if="{{item.due}}">{{item.dueText}}</text>
+          <text class="tag x" wx:if="{{item.priority === 'high'}}">高</text>
+          <text class="tag o" wx:if="{{item.priority === 'mid'}}">中</text>
+          <text class="tag a" wx:if="{{item.projectTitle}}">{{item.projectTitle}}</text>
+        </view>
+      </view>
+      <view class="btn ghost sm" data-id="{{item._id}}" catchtap="del">删</view>
+    </view>
+    <view class="empty" wx:if="{{!list.length}}"><view class="big">这里空着</view>新建一条，或从活动详情「生成待办」</view>
+  </view>
+
+  <view class="fab" bindtap="create">+</view>
+</view>
